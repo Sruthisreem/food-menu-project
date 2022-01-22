@@ -8,7 +8,6 @@ async function getapi(url) {
 
   // Storing data in form of JSON
   var data = await response.json();
-  console.log(data);
   if (response) {
     hideloader();
   }
@@ -27,15 +26,23 @@ function show(data) {
   let menuItems = "";
   // Loop to access all rows
   for (let r of data.MenuSections) {
-    console.log("MenuSections", data.MenuSections);
-    console.log("r", r);
-
     navElements += `<a href="#${r.Name}">${r.Name}</a>`;
-    for (let list of r) {
-        menuItems+=
+    menuItems += `<h id="${r.Name}" class="section-header">${r.Name}</h>`;
+
+    for (let list of r.MenuItems) {
+      menuItems += `
+      <div class="menu-item">
+        <div id="itemName" class="item-name">${list.Name}</div>
+        <div id="itemStatus" class="status">
+        ${list.SoldOut ? `<div class="item-status">SoldOut</div>` : ""} 
+            </div>           
+        <div id="itemPrice" class="item-price">&euro;${list.Price.toFixed(
+          2
+        )}</div>
+      </div>`;
     }
   }
-  console.log("navElements", navElements);
   // Setting innerHTML as tab variable
   document.getElementById("topnav").innerHTML = navElements;
+  document.getElementById("menuDetails").innerHTML = menuItems;
 }
