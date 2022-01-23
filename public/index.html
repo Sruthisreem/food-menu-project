@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./css/index.css" />
-    <!-- <script src="./js/api.js" defer></script> -->
     <script src="./js/index.js" defer></script>
     <title>Document</title>
   </head>
@@ -13,34 +12,39 @@
     <div class="spinner-border" role="status" id="loading">
       <span class="sr-only">Loading...</span>
     </div>
-    <div class="popup" id="popup">
-      <div class="overlay"></div>
-      <div class="popup-content">
-        <span class="close-btn" id="close">&times;</span>
-        <div class="details-container">
-          <div id="itemName">Burger</div>
-          <div id="itemRate">$78</div>
-          <input
-            class="item-number"
-            type="number"
-            name="points"
-            min="0"
-            value="0"
-            step="1"
-          />
-          <button id="orderButton">Add to Order</button>
-        </div>
-      </div>
-    </div>
     <div class="wrapper">
       <div id="topnav" class="top-nav"></div>
       <div id="menuDetails" class="menu-details"></div>
-      <div id="footer" class="footer">
-        <div>item 1</div>
-        <div>item 1</div>
-        <div>item 1</div>
-        <div>item 1</div>
-      </div>
+      <div id="overlay" class="overlay"></div>
+      <footer id="footer" class="footer">
+        <h2>Footer Header</h2>
+        <div class="footer-data">
+          <ul>
+            <li>item one</li>
+            <li>item two</li>
+            <li>item three</li>
+            <li>item four</li>
+          </ul>
+          <ol>
+            <li>item one</li>
+            <li>item two</li>
+            <li>item three</li>
+            <li>item four</li>
+          </ol>
+          <ul>
+            <li>item one</li>
+            <li>item two</li>
+            <li>item three</li>
+            <li>item four</li>
+          </ul>
+          <ol>
+            <li>item one</li>
+            <li>item two</li>
+            <li>item three</li>
+            <li>item four</li>
+          </ol>
+        </div>
+      </footer>
     </div>
   </body>
 </html>

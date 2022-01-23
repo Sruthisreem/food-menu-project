@@ -19,8 +19,8 @@ getapi(api_url);
 // Function to hide the loader
 function hideloader() {
   document.getElementById("loading").style.display = "none";
+  document.getElementById("footer").style.display = "block";
 }
-
 // Function to define innerHTML for HTML table
 function show(data) {
   let navElements = "";
@@ -32,7 +32,11 @@ function show(data) {
 
     for (let list of r.MenuItems) {
       menuItems += `
-      <div id="menuItem" class="menu-item">
+      <div class="menu-item ${
+        list.SoldOut ? "no-cursor" : ""
+      }" onclick="showAddToCartPopUp('${encodeURIComponent(
+        JSON.stringify(list)
+      )}')">
         <div id="itemName" class="item-name">${list.Name}</div>
         <div id="itemStatus" class="status">
         ${list.SoldOut ? `<div class="item-status">SoldOut</div>` : ""} 
@@ -46,21 +50,30 @@ function show(data) {
   // Setting innerHTML as tab variable
   document.getElementById("topnav").innerHTML = navElements;
   document.getElementById("menuDetails").innerHTML = menuItems;
-  let menuItem = document.getElementById("menuItem");
-  let popup = document.getElementById("popup");
-  let popupClose = document.getElementById("close");
-  let addOrderButton = document.getElementById("orderButton");
+}
 
-  menuItem.addEventListener("click", function (e) {
-    console.log("clickevent", e);
-    popup.style.display = "block";
-  });
-  popupClose.addEventListener("click", function (e) {
-    console.log("clickevent", e);
-    popup.style.display = "none";
-  });
-  addOrderButton.addEventListener("click", function (e) {
-    console.log("clickevent", e);
-    popup.style.display = "none";
-  });
+function showAddToCartPopUp(data) {
+  const itemData = JSON.parse(decodeURIComponent(data));
+  const overlay = document.getElementById("overlay");
+  const popUpMarkUp = `
+  <div class="popup">
+    <a class="close" onclick="closeAddToCartPopUp();">&times;</a>
+    <div class="popup-content">
+      <h4>${itemData.Name}</h4>
+      <span>&euro;${itemData.Price.toFixed(2)}</span>
+      <input type="number" id="quantity" name="quantity" min="1" value="1">
+      <button onclick="closeAddToCartPopUp();">Add to Order</button>
+    </div>
+</div>
+  `;
+  overlay.innerHTML = popUpMarkUp;
+  overlay.style.opacity = 1;
+  overlay.style.visibility = "visible";
+}
+
+function closeAddToCartPopUp() {
+  const overlay = document.getElementById("overlay");
+  overlay.style.opacity = 0;
+  overlay.style.visibility = "hidden";
+  overlay.innerHTML = "";
 }
