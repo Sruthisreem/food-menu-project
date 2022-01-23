@@ -20,6 +20,7 @@ getapi(api_url);
 function hideloader() {
   document.getElementById("loading").style.display = "none";
 }
+
 // Function to define innerHTML for HTML table
 function show(data) {
   let navElements = "";
@@ -31,7 +32,7 @@ function show(data) {
 
     for (let list of r.MenuItems) {
       menuItems += `
-      <div class="menu-item">
+      <div id="menuItem" class="menu-item">
         <div id="itemName" class="item-name">${list.Name}</div>
         <div id="itemStatus" class="status">
         ${list.SoldOut ? `<div class="item-status">SoldOut</div>` : ""} 
@@ -45,4 +46,21 @@ function show(data) {
   // Setting innerHTML as tab variable
   document.getElementById("topnav").innerHTML = navElements;
   document.getElementById("menuDetails").innerHTML = menuItems;
+  let menuItem = document.getElementById("menuItem");
+  let popup = document.getElementById("popup");
+  let popupClose = document.getElementById("close");
+  let addOrderButton = document.getElementById("orderButton");
+
+  menuItem.addEventListener("click", function (e) {
+    console.log("clickevent", e);
+    popup.style.display = "block";
+  });
+  popupClose.addEventListener("click", function (e) {
+    console.log("clickevent", e);
+    popup.style.display = "none";
+  });
+  addOrderButton.addEventListener("click", function (e) {
+    console.log("clickevent", e);
+    popup.style.display = "none";
+  });
 }

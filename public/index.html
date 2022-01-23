@@ -10,9 +10,26 @@
     <title>Document</title>
   </head>
   <body>
-    <div class="d-flex justify-content-center">
-      <div class="spinner-border" role="status" id="loading">
-        <span class="sr-only">Loading...</span>
+    <div class="spinner-border" role="status" id="loading">
+      <span class="sr-only">Loading...</span>
+    </div>
+    <div class="popup" id="popup">
+      <div class="overlay"></div>
+      <div class="popup-content">
+        <span class="close-btn" id="close">&times;</span>
+        <div class="details-container">
+          <div id="itemName">Burger</div>
+          <div id="itemRate">$78</div>
+          <input
+            class="item-number"
+            type="number"
+            name="points"
+            min="0"
+            value="0"
+            step="1"
+          />
+          <button id="orderButton">Add to Order</button>
+        </div>
       </div>
     </div>
     <div class="wrapper">
