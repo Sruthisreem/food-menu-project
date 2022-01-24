@@ -77,3 +77,8 @@ function closeAddToCartPopUp() {
   overlay.style.visibility = "hidden";
   overlay.innerHTML = "";
 }
+
+const topnavelem = document.getElementById("topnav");
+topnavelem.addEventListener("click", function (e) {
+  console.log("e", e);
+});
