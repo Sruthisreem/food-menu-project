@@ -41,7 +41,7 @@ function show(data) {
         <div id="itemStatus" class="status">
         ${list.SoldOut ? `<div class="item-status">SoldOut</div>` : ""} 
             </div>           
-        <div id="itemPrice" class="item-price">&euro;${list.Price.toFixed(
+        <div id="itemPrice" class="item-price">&dollar;${list.Price.toFixed(
           2
         )}</div>
       </div>`;
@@ -60,7 +60,7 @@ function showAddToCartPopUp(data) {
     <a class="close" onclick="closeAddToCartPopUp();">&times;</a>
     <div class="popup-content">
       <h4>${itemData.Name}</h4>
-      <span>&euro;${itemData.Price.toFixed(2)}</span>
+      <span>&dollar;${itemData.Price.toFixed(2)}</span>
       <input type="number" id="quantity" name="quantity" min="1" value="1">
       <button onclick="closeAddToCartPopUp();">Add to Order</button>
     </div>
