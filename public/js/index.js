@@ -21,16 +21,16 @@ function hideloader() {
   document.getElementById("loading").style.display = "none";
   document.getElementById("footer").style.display = "block";
 }
-// Function to define innerHTML for HTML table
+// Function to show content with data
 function show(data) {
   let navElements = "";
   let menuItems = "";
   // Loop to access all rows
-  for (let r of data.MenuSections) {
-    navElements += `<a href="#${r.Name}">${r.Name}</a>`;
-    menuItems += `<h id="${r.Name}" class="section-header">${r.Name}</h>`;
+  for (let dataItem of data.MenuSections) {
+    navElements += `<a href="#${dataItem.Name}" onclick="setMenuItem(this)">${dataItem.Name}</a>`;
+    menuItems += `<h id="${dataItem.Name}" class="section-header">${dataItem.Name}</h>`;
 
-    for (let list of r.MenuItems) {
+    for (let list of dataItem.MenuItems) {
       menuItems += `
       <div class="menu-item ${
         list.SoldOut ? "no-cursor" : ""
@@ -39,7 +39,7 @@ function show(data) {
       )}')">
         <div id="itemName" class="item-name">${list.Name}</div>
         <div id="itemStatus" class="status">
-        ${list.SoldOut ? `<div class="item-status">SoldOut</div>` : ""} 
+        ${list.SoldOut ? `<div class="item-status">Sold Out</div>` : ""} 
             </div>           
         <div id="itemPrice" class="item-price">&dollar;${list.Price.toFixed(
           2
@@ -47,11 +47,13 @@ function show(data) {
       </div>`;
     }
   }
-  // Setting innerHTML as tab variable
+
   document.getElementById("topnav").innerHTML = navElements;
   document.getElementById("menuDetails").innerHTML = menuItems;
+  document.getElementById("topnav").firstElementChild.classList.add("active");
 }
 
+//function to show add to cart popup
 function showAddToCartPopUp(data) {
   const itemData = JSON.parse(decodeURIComponent(data));
   const overlay = document.getElementById("overlay");
@@ -62,7 +64,7 @@ function showAddToCartPopUp(data) {
       <h4>${itemData.Name}</h4>
       <span>&dollar;${itemData.Price.toFixed(2)}</span>
       <input type="number" id="quantity" name="quantity" min="1" value="1">
-      <button onclick="closeAddToCartPopUp();">Add to Order</button>
+      <button class="add-cart-button" onclick="closeAddToCartPopUp();">Add to Order</button>
     </div>
 </div>
   `;
@@ -71,6 +73,7 @@ function showAddToCartPopUp(data) {
   overlay.style.visibility = "visible";
 }
 
+// function to close the popup
 function closeAddToCartPopUp() {
   const overlay = document.getElementById("overlay");
   overlay.style.opacity = 0;
@@ -78,7 +81,11 @@ function closeAddToCartPopUp() {
   overlay.innerHTML = "";
 }
 
-const topnavelem = document.getElementById("topnav");
-topnavelem.addEventListener("click", function (e) {
-  console.log("e", e);
-});
+//function to maintain active state on selected top navigation menu
+function setMenuItem(menuItem) {
+  var checkChildStatus = document.querySelector("#topnav .active");
+  if (checkChildStatus) {
+    checkChildStatus.classList.remove("active");
+  }
+  menuItem.classList.add("active");
+}
