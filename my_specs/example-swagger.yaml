@@ -14,11 +14,11 @@
       "get" : {
         "tags" : [ "Device" ],
         "description" : "returns all registered devices",
-        "operationId" : "getDevices",
+        "operationId" : "getDeviceslist",
         "parameters" : [ {
           "name" : "skip",
           "in" : "query",
-          "description" : "number of records to skip",
+          "description" : "number of records to skip needed",
           "required" : false,
           "style" : "form",
           "explode" : true,
